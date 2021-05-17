@@ -1,0 +1,18 @@
+.red{
+    background-color: rgb(140, 38, 38);
+}
+.red:hover{
+    background-color: #e97770;
+}
+.green{
+    background-color: rgb(38, 140, 64) !important;
+}
+.green:hover{
+    background-color: #72e990 !important;
+}
+form label{
+    color: #919499
+}
+select{
+    color: #56585d;
+}
