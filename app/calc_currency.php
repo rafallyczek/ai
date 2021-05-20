@@ -1,6 +1,8 @@
 <?php
 require_once dirname(__FILE__).'/../config.php';
 
+require_once _ROOT_PATH.'/lib/smarty/Smarty.class.php';
+
 include _ROOT_PATH.'/app/security/guard.php';
 
 function getParams(&$form){
@@ -60,4 +62,16 @@ if(validate($form, $messages)){
     process($form, $result);
 }
 
-include 'calc_currency_view.php';
+$smarty = new Smarty();
+
+$smarty->assign('app_url',_APP_URL);
+$smarty->assign('app_root',_APP_ROOT);
+$smarty->assign('root_path',_ROOT_PATH);
+$smarty->assign('page_title','Kalkulator walut');
+$smarty->assign('page_description','Zamiana kwot w PLN na inne waluty.');
+
+$smarty->assign('form',$form);
+$smarty->assign('result',$result);
+$smarty->assign('messages',$messages);
+
+$smarty->display(_ROOT_PATH.'/app/calc_currency.tpl');

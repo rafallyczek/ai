@@ -13,6 +13,9 @@
 form label{
     color: #919499
 }
-select{
-    color: #56585d;
+select, input{
+    color: #404040 !important;
+}
+input[type="submit"]{
+    color: #fff !important;
 }
