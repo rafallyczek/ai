@@ -1,4 +1,4 @@
-{extends file="../templates/main.tpl"}
+{extends file="../../templates/main.tpl"}
 
 {block name=content}
     
@@ -9,7 +9,7 @@
 
                 <!-- Form -->
                 <section>
-                    <form method="post" action="{$config->app_url}/app/calc_currency.php">
+                    <form method="post" action="{$config->action_root}calcCurrency">
                         <div class="row gtr-50">
                             <div class="col-6 col-12-small">
                                 <label for="amount">Kwota: </label>

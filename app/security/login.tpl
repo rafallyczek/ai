@@ -9,7 +9,7 @@
 
                 <!-- Form -->
 		<section>
-                    <form method="post" action="{$config->app_root}/app/security/login.php">
+                    <form method="post" action="{$config->action_root}login">
 			<div class="row gtr-50">
                             <div class="col-6 col-12-small">
                                 <label for="login">Login: </label>

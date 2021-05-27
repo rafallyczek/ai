@@ -2,7 +2,7 @@
 
 require_once $config->root_path.'/lib/smarty/Smarty.class.php';
 require_once $config->root_path.'/lib/Messages.class.php';
-require_once $config->root_path.'/app/CalcCurrencyForm.class.php';
+require_once $config->root_path.'/app/calc/CalcCurrencyForm.class.php';
 
 class CalcCurrencyController{
     
@@ -81,7 +81,7 @@ class CalcCurrencyController{
         $smarty->assign('result',$this->result);
         $smarty->assign('messages',$this->messages);
 
-        $smarty->display($config->root_path.'/app/calc_currency.tpl');
+        $smarty->display($config->root_path.'/app/calc/calc_currency.tpl');
     }
     
 }
