@@ -23,7 +23,7 @@
             <!-- Nav -->
             <nav id="nav">
 		<ul class="red">
-                    <li class="current"><a href="{$config->app_root}/app/security/logout.php">Wyloguj</a></li>
+                    <li class="current"><a href="{$config->action_root}logout">Wyloguj</a></li>
 		</ul>
             </nav>
             {/if}

@@ -1,24 +1,20 @@
 <?php
 
-require_once $config->root_path.'/lib/smarty/Smarty.class.php';
-require_once $config->root_path.'/lib/Messages.class.php';
-require_once $config->root_path.'/app/calc/CalcCurrencyForm.class.php';
+require_once 'CalcCurrencyForm.class.php';
 
 class CalcCurrencyController{
     
     private $form;
     private $result;
-    private $messages;
     
     public function __construct(){
         $this->form = new CalcCurrencyForm();
-        $this->result = null;
-        $this->messages = new Messages();  
+        $this->result = null; 
     }
         
     public function getParams(){
-        $this->form->amount = isset($_REQUEST ['amount']) ? $_REQUEST ['amount'] : null;
-        $this->form->currency = isset($_REQUEST ['currency']) ? $_REQUEST ['currency'] : null;
+        $this->form->amount = getRequestParameter('amount');
+        $this->form->currency = getRequestParameter('currency');
     }    
     
     public function validate(){
@@ -27,12 +23,12 @@ class CalcCurrencyController{
         }
     
         if($this->form->amount == "") {
-            $this->messages->addError('Nie podano kwoty.');
+            getMessages()->addError('Nie podano kwoty.');
             return false;
         }
     
         if(!is_numeric($this->form->amount)){
-            $this->messages->addError('Kwota nie jest liczbą.');
+            getMessages()->addError('Kwota nie jest liczbą.');
             return false;
         }
     
@@ -69,19 +65,13 @@ class CalcCurrencyController{
     }
     
     public function generateView(){
-        global $config;
-        
-        $smarty = new Smarty();
+        getSmarty()->assign('page_title','Kalkulator walut');
+        getSmarty()->assign('page_description','Zamiana kwot w PLN na inne waluty.');
 
-        $smarty->assign('config',$config);
-        $smarty->assign('page_title','Kalkulator walut');
-        $smarty->assign('page_description','Zamiana kwot w PLN na inne waluty.');
+        getSmarty()->assign('form',$this->form);
+        getSmarty()->assign('result',$this->result);
 
-        $smarty->assign('form',$this->form);
-        $smarty->assign('result',$this->result);
-        $smarty->assign('messages',$this->messages);
-
-        $smarty->display($config->root_path.'/app/calc/calc_currency.tpl');
+        getSmarty()->display('calc_currency.tpl');
     }
     
 }

@@ -1,4 +1,4 @@
-{extends file="../../templates/main.tpl"}
+{extends file="main.tpl"}
 
 {block name=content}
     
