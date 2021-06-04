@@ -1,6 +1,7 @@
 <?php
+namespace app\controllers;
 
-require_once 'CalcCurrencyForm.class.php';
+use app\forms\CalcCurrencyForm;
 
 class CalcCurrencyController{
     

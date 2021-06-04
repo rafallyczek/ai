@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__FILE__).'/core/Config.class.php';
-$config = new Config();
+$config = new core\Config();
 include dirname(__FILE__).'/config.php';
 
 function &getConfig(){
@@ -9,7 +9,7 @@ function &getConfig(){
 }
 
 require_once getConfig()->root_path.'/core/Messages.class.php';
-$messages = new Messages();
+$messages = new core\Messages();
 
 function &getMessages(){
     global $messages;
@@ -30,6 +30,14 @@ function &getSmarty(){
             ));
     }
     return $smarty;
+}
+
+require_once getConfig()->root_path.'/core/ClassLoader.class.php';
+$classLoader = new core\ClassLoader();
+
+function &getLoader() {
+    global $classLoader;
+    return $classLoader;
 }
 
 require_once getConfig()->root_path.'/core/functions.php';

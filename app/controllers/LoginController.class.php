@@ -1,6 +1,7 @@
 <?php
+namespace app\controllers;
 
-require_once 'LoginForm.class.php';
+use app\forms\LoginForm;
 
 class LoginController{
     
@@ -51,7 +52,7 @@ class LoginController{
         if(!$this->validateLogin()){
             $this->generateView();
         }else{
-            header("Location: ". getConfig()->app_url);
+            header("Location: ".getConfig()->app_url);
         }
         
     }

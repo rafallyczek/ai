@@ -1,21 +1,21 @@
 <?php
 require_once 'init.php';
 
+use app\controllers\CalcCurrencyController;
+use app\controllers\LoginController;
+
 include getConfig()->root_path.'/app/security/guard.php';
 
 switch($action){
     default:
-        include_once getConfig()->root_path.'/app/controllers/CalcCurrencyController.class.php';
         $controller = new CalcCurrencyController();
         $controller->generateView();
         break;
     case 'calcCurrency':
-        include_once getConfig()->root_path.'/app/controllers/CalcCurrencyController.class.php';
         $controller = new CalcCurrencyController();
         $controller->process();
         break;
     case 'login':
-        include_once getConfig()->root_path.'/app/controllers/LoginController.class.php';
         $controller = new LoginController();
         $controller->processLogin();
         break;
