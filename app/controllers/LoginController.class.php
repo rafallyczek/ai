@@ -1,16 +1,15 @@
 <?php
 namespace app\controllers;
 
+use app\transfer\User;
 use app\forms\LoginForm;
 
 class LoginController{
     
     private $form;
-    private $login;
     
     public function __construct(){
         $this->form = new LoginForm();
-        $this->login = true;
     }
     
     public function getLoginParams(){
@@ -35,8 +34,11 @@ class LoginController{
         }
         
         if($this->form->login=="user" && $this->form->password=="pass"){
-            session_start();
-            $_SESSION['role'] = 'user';
+            if(session_status() == PHP_SESSION_NONE){
+                session_start();
+            }
+            $user = new User($this->form->login,'user');
+            $_SESSION['user'] = serialize($user);
             return true;
         }
     
@@ -57,12 +59,21 @@ class LoginController{
         
     }
     
+    public function processLogout(){
+        
+        if(session_status() == PHP_SESSION_NONE){
+            session_start();
+        }
+        session_destroy();
+        $this->generateView();
+        
+    }
+    
     public function generateView(){
         getSmarty()->assign('page_title','Logowanie');
         getSmarty()->assign('page_description','Zaloguj się do aplikacji.');
 
         getSmarty()->assign('form',$this->form);
-        getSmarty()->assign('login',$this->login);
 
         getSmarty()->display('login.tpl');
     }
