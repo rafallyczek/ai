@@ -34,11 +34,9 @@ class LoginController{
         }
         
         if($this->form->login=="user" && $this->form->password=="pass"){
-            if(session_status() == PHP_SESSION_NONE){
-                session_start();
-            }
             $user = new User($this->form->login,'user');
             $_SESSION['user'] = serialize($user);
+            addRole($user->role);
             return true;
         }
     
@@ -61,10 +59,8 @@ class LoginController{
     
     public function processLogout(){
         
-        if(session_status() == PHP_SESSION_NONE){
-            session_start();
-        }
         session_destroy();
+        clearRoles();
         $this->generateView();
         
     }

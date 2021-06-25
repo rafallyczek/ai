@@ -1,27 +1,13 @@
 <?php
 require_once 'init.php';
 
-use app\controllers\CalcCurrencyController;
-use app\controllers\LoginController;
-
 switch($action){
     default:
-        include 'guard.php';
-        $controller = new CalcCurrencyController();
-        $controller->generateView();
-        break;
+        control('CalcCurrencyController','generateView','user');
     case 'calcCurrency':
-        include 'guard.php';
-        $controller = new CalcCurrencyController();
-        $controller->process();
-        break;
+        control('CalcCurrencyController','process','user');
     case 'login':
-        $controller = new LoginController();
-        $controller->processLogin();
-        break;
+        control('LoginController','processLogin');
     case 'logout':
-        include 'guard.php';
-        $controller = new LoginController();
-        $controller->processLogout();
-        break;
+        control('LoginController','processLogout','user');
 }

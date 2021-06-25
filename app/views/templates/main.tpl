@@ -19,7 +19,7 @@
 		<p>{$page_description|default:"Opis domyślny"}</p>
             </div>
             
-            {if !isset($login)}
+            {if isLogged()}
             <!-- Nav -->
             <nav id="nav">
 		<ul class="red">

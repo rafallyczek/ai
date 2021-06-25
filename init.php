@@ -41,4 +41,8 @@ function &getLoader() {
 }
 
 require_once getConfig()->root_path.'/core/functions.php';
+
+session_start();
+$config->roles = isset($_SESSION['_roles']) ? unserialize($_SESSION['_roles']) : array();
+
 $action = getRequestParameter('action');
