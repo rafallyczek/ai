@@ -1,4 +1,9 @@
 <?php
+
+use core\ClassLoader;
+use core\Router;
+use core\Messages;
+
 require_once dirname(__FILE__).'/core/Config.class.php';
 $config = new core\Config();
 include dirname(__FILE__).'/config.php';
@@ -9,7 +14,7 @@ function &getConfig(){
 }
 
 require_once getConfig()->root_path.'/core/Messages.class.php';
-$messages = new core\Messages();
+$messages = new Messages();
 
 function &getMessages(){
     global $messages;
@@ -33,11 +38,17 @@ function &getSmarty(){
 }
 
 require_once getConfig()->root_path.'/core/ClassLoader.class.php';
-$classLoader = new core\ClassLoader();
-
+$classLoader = new ClassLoader();
 function &getLoader() {
     global $classLoader;
     return $classLoader;
+}
+
+require_once getConfig()->root_path.'/core/Router.class.php';
+$router = new Router();
+function &getRouter() {
+    global $router; 
+    return $router;
 }
 
 require_once getConfig()->root_path.'/core/functions.php';
@@ -45,4 +56,4 @@ require_once getConfig()->root_path.'/core/functions.php';
 session_start();
 $config->roles = isset($_SESSION['_roles']) ? unserialize($_SESSION['_roles']) : array();
 
-$action = getRequestParameter('action');
+$router->setAction( getRequestParameter('action') );

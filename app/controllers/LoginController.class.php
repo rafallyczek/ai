@@ -45,7 +45,7 @@ class LoginController{
         
     }
     
-    public function processLogin() {
+    public function action_login() {
 
         $this->getLoginParams();
         
@@ -57,7 +57,7 @@ class LoginController{
         
     }
     
-    public function processLogout(){
+    public function action_logout(){
         
         session_destroy();
         clearRoles();

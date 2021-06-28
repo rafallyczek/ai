@@ -36,7 +36,7 @@ class CalcCurrencyController{
         return true;
     }
     
-    public function process(){
+    public function action_calcCurrency(){
         
         $this->getParams();
         
@@ -63,6 +63,10 @@ class CalcCurrencyController{
         
         $this->generateView();
         
+    }
+    
+    public function action_calcShow(){
+       $this->generateView();
     }
     
     public function generateView(){
