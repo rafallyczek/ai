@@ -1,5 +1,4 @@
 <html>
-    
 <head>
     <title>{$page_title|default:"Tytuł domyślny"}</title>
     <meta charset="utf-8" />
@@ -22,7 +21,15 @@
             {if isLogged()}
             <!-- Nav -->
             <nav id="nav">
-		<ul class="red">
+                <ul>
+                    <li class="current"><a href="{$config->action_root}calcShow">Kalkulator</a></li>
+		</ul>
+                {if isAdmin()}
+                <ul>
+                    <li class="current"><a href="{$config->action_root}history">Historia</a></li>
+		</ul>
+                {/if}
+                <ul class="red">
                     <li class="current"><a href="{$config->action_root}logout">Wyloguj</a></li>
 		</ul>
             </nav>

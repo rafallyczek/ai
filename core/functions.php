@@ -1,4 +1,4 @@
-<?php
+b<?php
 
 function getRequestParameter($name){
     return isset($_REQUEST[$name]) ? $_REQUEST[$name] : null;
@@ -26,6 +26,16 @@ function hasRole($role){
 
 function isLogged(){
     return !empty(getConfig()->roles);
+}
+
+function isAdmin(){
+    $user = unserialize($_SESSION['user']);
+    if(isset($user)){
+        if($user->role == 'admin'){
+            return true;
+        }
+    }
+    return false;
 }
 
 function clearRoles(){

@@ -38,6 +38,11 @@ class LoginController{
             $_SESSION['user'] = serialize($user);
             addRole($user->role);
             return true;
+        }elseif($this->form->login=="admin" && $this->form->password=="pass"){
+            $user = new User($this->form->login,'admin');
+            $_SESSION['user'] = serialize($user);
+            addRole($user->role);
+            return true;
         }
     
         getMessages()->addError('Nieprawidłowy login lub hasło.');
