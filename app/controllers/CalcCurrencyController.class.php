@@ -2,6 +2,8 @@
 namespace app\controllers;
 
 use app\forms\CalcCurrencyForm;
+use app\transfer\User;
+use PDOException;
 
 class CalcCurrencyController{
     
@@ -57,6 +59,20 @@ class CalcCurrencyController{
                 default :
                     $this->result = $this->form->amount * 0.22;
                     break;
+            }
+            
+            try{
+                $database = getDatabase();
+                $user = unserialize($_SESSION['user']);
+                $database->insert("wynik", [
+                    "kwota" => $this->form->amount,
+                    "waluta" => $this->form->currency,
+                    "wynik" => $this->result,
+                    "user" => $user->login,
+                    "data" => date("Y-m-d H:i:s")
+                ]);
+            } catch (PDOException $ex) {
+                getMessages()->addError('Błąd bazy danych: '.$ex->getMessage());
             }
             
         }

@@ -51,6 +51,26 @@ function &getRouter() {
     return $router;
 }
 
+$database = null;
+function &getDatabase(){
+    global $config;
+    global $database;
+    if(!isset($database)){
+        require_once getConfig()->root_path.'/lib/medoo/Medoo.class.php';
+        $database = new \Medoo\Medoo([
+            'database_type' => &$config->db_type,
+            'server' => &$config->db_server,
+            'database_name' => &$config->db_name,
+            'username' => &$config->db_user,
+            'password' => &$config->db_pass,
+            'charset' => &$config->db_charset,
+            'port' => &$config->db_port,
+            'option' => &$config->db_option
+        ]);
+    }
+    return $database;
+}
+
 require_once getConfig()->root_path.'/core/functions.php';
 
 session_start();
