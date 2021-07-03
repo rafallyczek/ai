@@ -127,12 +127,12 @@ class Smarty_Internal_ParseTree_Template extends Smarty_Internal_ParseTree
     }
 
     private function getChunkedSubtrees() {
-    	$chunks = array();
+    	$chunks = [];
     	$currentMode = null;
-    	$currentChunk = array();
+    	$currentChunk = [];
 	    for ($key = 0, $cnt = count($this->subtrees); $key < $cnt; $key++) {
 
-	    	if ($this->subtrees[ $key ]->data === '' && in_array($currentMode, array('textstripped', 'text', 'tag'))) {
+	    	if ($this->subtrees[ $key ]->data === '' && in_array($currentMode, ['textstripped', 'text', 'tag'])) {
 	    		continue;
 	    	}
 
@@ -150,19 +150,19 @@ class Smarty_Internal_ParseTree_Template extends Smarty_Internal_ParseTree
 		    if ($newMode == $currentMode) {
 			    $currentChunk[] = $this->subtrees[ $key ];
 		    } else {
-		    	$chunks[] = array(
+		    	$chunks[] = [
 		    		'mode' => $currentMode,
 				    'subtrees' => $currentChunk
-			    );
+			    ];
 		    	$currentMode = $newMode;
-			    $currentChunk = array($this->subtrees[ $key ]);
+			    $currentChunk = [$this->subtrees[ $key ]];
 		    }
 	    }
 	    if ($currentMode && $currentChunk) {
-		    $chunks[] = array(
+		    $chunks[] = [
 			    'mode' => $currentMode,
 			    'subtrees' => $currentChunk
-		    );
+		    ];
 	    }
 		return $chunks;
     }

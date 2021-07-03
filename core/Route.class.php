@@ -1,13 +1,12 @@
-<?php 
-
-namespace core;
-
+<?php namespace core;
 class Route{
-	public $controller_name = null;
+	public $namespace = null;
+	public $controller = null;
 	public $method = null;
 	public $roles = null;
-	public function __construct($controller_name,$method,$roles){
-		$this->controller_name = $controller_name;
+	public function __construct($namespace,$controller,$method,$roles){
+		$this->namespace = $namespace;
+		$this->controller = $controller;
 		$this->method = $method;
 		$this->roles = $roles;
 	}

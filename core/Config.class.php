@@ -1,19 +1,19 @@
-<?php 
-namespace core;
-
-class Config{
+<?php namespace core;
+class Config extends \ArrayObject{
+	public $debug=false;
+	public $clean_urls=false;
+	public $root_path;
 	public $server_name;
+	public $protocol;
 	public $server_url;
 	public $app_root;
 	public $app_url; 
-        public $root_path;
-        public $action_root;
-        public $action_url;
-        
-        public $login_action;
+	public $action_param;
+	public $action_script;
+	public $action_root;
+	public $action_url;
 	public $roles;
-        
-        public $db_type;
+	public $db_type;
 	public $db_server;
 	public $db_port;
 	public $db_name;
