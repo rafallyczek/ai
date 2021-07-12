@@ -73,8 +73,7 @@ class LoginController{
     public function action_logout(){
         
         session_destroy();
-        App::getMessages()->addMessage(new Message('Wylogowano', Message::INFO));
-        App::getRouter()->redirectTo('book_list');
+        App::getRouter()->redirectTo('show_login');
         
     }
     
