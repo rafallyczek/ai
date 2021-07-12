@@ -9,7 +9,7 @@ class BookListController {
     
     public function action_book_list() {
 
-        App::getMessages()->addMessage(new Message("Wywołano akcję: book_list", Message::INFO));
+        App::getMessages()->addMessage(new Message("Tu będzie lista książek.", Message::INFO));
        
         App::getSmarty()->display("books.tpl");
         

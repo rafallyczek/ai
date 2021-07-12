@@ -16,11 +16,7 @@
         </ul>
     {/if}
 
-    <a href="{url action='login'}">Action: login</a>
-    
-    <br/>
-    
-    <a href="{url action='logout'}">Action: logout</a>
+    <a href="{url action='logout'}">Wyloguj</a>
     
     <br/>
     
