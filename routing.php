@@ -3,8 +3,10 @@
 use core\App;
 use core\Utils;
 
-App::getRouter()->setDefaultRoute('book_list');
+App::getRouter()->setDefaultRoute('show_main_page');
 App::getRouter()->setLoginRoute('show_login');
+
+Utils::addRoute('show_main_page', 'MainController');
 
 Utils::addRoute('show_login', 'LoginController');
 Utils::addRoute('login', 'LoginController');

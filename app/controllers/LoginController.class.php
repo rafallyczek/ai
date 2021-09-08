@@ -65,7 +65,7 @@ class LoginController{
         if(!$this->validateLogin()){
             App::getSmarty()->display('login.tpl');
         }else{
-            App::getRouter()->redirectTo('book_list');
+            App::getRouter()->redirectTo('show_main_page');
         }
         
     }
