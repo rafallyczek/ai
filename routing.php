@@ -12,7 +12,7 @@ Utils::addRoute('show_login', 'LoginController');
 Utils::addRoute('login', 'LoginController');
 Utils::addRoute('logout', 'LoginController');
 
-Utils::addRoute('book_list', 'BookListController', ['user','admin']);
+Utils::addRoute('book_list', 'BookListController');
 Utils::addRoute('book_details', 'BookListController', ['user','admin']);
 Utils::addRoute('book_review', 'BookListController', ['user','admin']);
 Utils::addRoute('book_delete', 'BookListController', ['admin']);

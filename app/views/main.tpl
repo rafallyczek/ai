@@ -78,40 +78,22 @@
         </section>
 	
 	<!-- Przykładowe książki -->
-        <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80">
+        <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80" style="padding-bottom: 100px;">
           <div class="u-clearfix u-sheet u-sheet-1">
             <h1 class="u-text u-text-1">Przykładowe książki</h1>
             <div class="u-expanded-width u-list u-list-1">
               <div class="u-repeater u-repeater-1">
 
-                <div class="u-container-style u-list-item u-repeater-item">
+                {foreach $books as $row}
+                <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 75px;">
                   <div class="u-container-layout u-similar-container u-container-layout-1">
-                    <img src="{$conf->app_url}/assets/images/book1.jpg" alt="" class="u-image u-image-default u-preserve-proportions u-image-1" data-image-width="626" data-image-height="626">
-                    <h2 class="u-text u-text-2">Book 1</h2>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3">Data 1</h5>
-                    <a href="#" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1">more</a>
+                    <img src="{$row['picture']}" alt="" class="u-image u-image-default u-preserve-proportions u-image-1" data-image-width="626" data-image-height="626" style="height: 375px; width: 250px;">
+                    <h2 class="u-text u-text-2" style="margin-top: -375px;">{$row['title']}</h2>
+                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3">Wydanie: {$row['release_year']}</h5>
+                    <a href="#" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1">Więcej</a>
                   </div>
                 </div>
-
-                <div class="u-container-style u-list-item u-repeater-item">
-                  <div class="u-container-layout u-similar-container u-container-layout-2">
-                    <img src="{$conf->app_url}/assets/images/book2.jpg" alt="" class="u-image u-image-default u-preserve-proportions u-image-2" data-image-width="626" data-image-height="626">
-                    <h2 class="u-text u-text-4">Book 2</h2>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-5">Data 2</h5>
-                    <a href="#" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-2">more</a>
-                  </div>
-                </div>
-
-                <div class="u-container-style u-list-item u-repeater-item">
-                  <div class="u-container-layout u-similar-container u-container-layout-3">
-                    <img src="{$conf->app_url}/assets/images/book3.jpg" alt="" class="u-image u-image-default u-preserve-proportions u-image-3" data-image-width="626" data-image-height="626">
-                    <h2 class="u-text u-text-6">Book 3</h2>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-7">Data 3</h5>
-                    <a href="#" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-3">more</a>
-                  </div>
-                </div>
-
-                <br/>
+                {/foreach}
 
               </div>
             </div>
