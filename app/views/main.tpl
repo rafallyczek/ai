@@ -59,7 +59,7 @@
                     <div class="u-container-layout u-container-layout-1"></div>
                   </div>
                   <div class="u-align-left u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                    <div class="u-container-layout u-valign-middle u-container-layout-2">
+                    <div class="u-container-layout u-valign-middle u-container-layout-2" style="justify-content: start;">
                       <h1 class="u-text u-title u-text-1">Książki</h1>
                       <h5 class="u-text u-text-body-color u-text-2">Na tej stronie możesz czytać lub pisać recenzje książek.</h5>
                       <h4 class="u-text u-text-3">Rafał Łyczek</h4>
