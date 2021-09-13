@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use core\App;
 use core\Message;
+use core\ParamUtils;
 
 class BookListController {
     
@@ -18,9 +19,11 @@ class BookListController {
     
     public function action_book_details() {
 
-        App::getMessages()->addMessage(new Message("Wywołano akcję: book_details", Message::INFO));
-       
-        App::getSmarty()->display("books.tpl");
+        $id = ParamUtils::getFromCleanURL(1);
+        $book = App::getDB()->select("books", "*", ["id" => $id]);
+        App::getSmarty()->assign("book",$book);
+        App::getSmarty()->assign('page_title',$book[0]["title"]);
+        App::getSmarty()->display("book.tpl");
         
     }
     

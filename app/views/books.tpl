@@ -29,7 +29,7 @@
                     <ul class="u-nav u-unstyled u-nav-1">
                         <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='show_main_page'}" style="padding: 10px 20px;">Strona Główna</a></li>
                         <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='book_list'}" style="padding: 10px 20px;">Książki</a></li>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='logout'}" style="padding: 10px 20px;">Wyloguj</a></li>
+                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='show_login'}" style="padding: 10px 20px;">Logowanie</a></li>
                     </ul>
                   </div>
                   <div class="u-nav-container-collapse">
@@ -62,7 +62,7 @@
                     <img src="{$row['picture']}" alt="" class="u-image u-image-default u-preserve-proportions u-image-1" data-image-width="626" data-image-height="626" style="height: 375px; width: 250px;">
                     <h2 class="u-text u-text-2" style="margin-top: -375px;">{$row['title']}</h2>
                     <h5 class="u-custom-font u-font-pt-sans u-text u-text-3">Wydanie: {$row['release_year']}</h5>
-                    <a href="#" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1">Więcej</a>
+                    <a href="{url action='book_details' id=$row['id']}" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1">Więcej</a>
                   </div>
                 </div>
                 {/foreach}
