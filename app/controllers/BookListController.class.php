@@ -9,8 +9,9 @@ class BookListController {
     
     public function action_book_list() {
 
-        App::getMessages()->addMessage(new Message("Tu będzie lista książek.", Message::INFO));
-       
+        $books = App::getDB()->select("books", "*");
+        App::getSmarty()->assign("books",$books);
+        App::getSmarty()->assign('page_title','Książki');
         App::getSmarty()->display("books.tpl");
         
     }

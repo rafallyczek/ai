@@ -56,6 +56,7 @@ class LoginController{
     
     public function action_show_login(){
         
+        App::getSmarty()->assign('page_title','Logowanie');
         App::getSmarty()->display('login.tpl');
         
     }
