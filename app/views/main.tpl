@@ -85,7 +85,7 @@
               <div class="u-repeater u-repeater-1">
 
                 {foreach $books as $row}
-                <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 75px;">
+                <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 30px; min-height: 375px;">
                   <div class="u-container-layout u-similar-container u-container-layout-1">
                     <img src="{$row['picture']}" alt="" class="u-image u-image-default u-preserve-proportions u-image-1" data-image-width="626" data-image-height="626" style="height: 375px; width: 250px;">
                     <h2 class="u-text u-text-2" style="margin-top: -375px;">{$row['title']}</h2>
