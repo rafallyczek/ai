@@ -12,9 +12,9 @@ Utils::addRoute('show_login', 'LoginController');
 Utils::addRoute('login', 'LoginController');
 Utils::addRoute('logout', 'LoginController');
 
-Utils::addRoute('book_list', 'BookListController');
-Utils::addRoute('book_details', 'BookListController');
-Utils::addRoute('book_review', 'BookListController', ['user','admin']);
-Utils::addRoute('book_delete', 'BookListController', ['admin']);
-Utils::addRoute('book_edit', 'BookListController', ['admin']);
-Utils::addRoute('book_add', 'BookListController', ['admin']);
+Utils::addRoute('book_list', 'BookController');
+Utils::addRoute('book_details', 'BookController');
+Utils::addRoute('book_review', 'BookController', ['user','admin']);
+Utils::addRoute('book_delete', 'BookController', ['admin']);
+Utils::addRoute('book_edit', 'BookController', ['admin']);
+Utils::addRoute('book_add', 'BookController', ['admin']);

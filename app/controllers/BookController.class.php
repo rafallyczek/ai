@@ -6,7 +6,7 @@ use core\App;
 use core\Message;
 use core\ParamUtils;
 
-class BookListController {
+class BookController {
     
     public function action_book_list() {
 
