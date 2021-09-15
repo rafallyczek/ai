@@ -24,6 +24,10 @@ class RoleUtils {
     public static function inRole($role) {
         return isset(App::getConf()->roles[$role]);
     }
+    
+    public static function inAnyRole(){
+        return !empty(App::getConf()->roles);
+    }
 
     public static function requireRole($role, $fail_action = null) {
         if (!self::inRole($role)) {

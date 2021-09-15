@@ -29,7 +29,12 @@
                     <ul class="u-nav u-unstyled u-nav-1">
                         <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='show_main_page'}" style="padding: 10px 20px;">Strona Główna</a></li>
                         <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='book_list'}" style="padding: 10px 20px;">Książki</a></li>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='show_login'}" style="padding: 10px 20px;">Logowanie</a></li>
+                        {if not \core\RoleUtils::inAnyRole()}
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='show_login'}" style="padding: 10px 20px;">Logowanie</a></li>
+                        {/if}
+                        {if \core\RoleUtils::inAnyRole()}
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='logout'}" style="padding: 10px 20px;">Wyloguj</a></li>
+                        {/if}
                     </ul>
                   </div>
                   <div class="u-nav-container-collapse">
@@ -39,7 +44,12 @@
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='show_main_page'}">Strona Główna</a></li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='book_list'}">Książki</a></li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='logout'}">Wyloguj</a></li>
+                            {if not \core\RoleUtils::inAnyRole()}
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='show_login'}">Logowanie</a></li>
+                            {/if}
+                            {if \core\RoleUtils::inAnyRole()}
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='logout'}">Wyloguj</a></li>
+                            {/if}
                         </ul>
                       </div>
                     </div>
@@ -53,6 +63,9 @@
         <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80" style="padding-bottom: 100px;">
           <div class="u-clearfix u-sheet u-sheet-1">
             <h1 class="u-text u-text-1">Książki</h1>
+            {if \core\RoleUtils::inRole("admin")}
+                <a href="#" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1" style="margin-left: 0;">Dodaj książkę</a>
+            {/if}
             <div class="u-expanded-width u-list u-list-1">
               <div class="u-repeater u-repeater-1">
                 
