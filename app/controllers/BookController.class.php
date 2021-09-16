@@ -21,7 +21,9 @@ class BookController {
 
         $id = ParamUtils::getFromCleanURL(1);
         $book = App::getDB()->select("books", "*", ["id" => $id]);
+        $reviews = App::getDB()->select("reviews", "*", ["book_id" => $id]);
         App::getSmarty()->assign("book",$book);
+        App::getSmarty()->assign("reviews",$reviews);
         App::getSmarty()->assign('page_title',$book[0]["title"]);
         App::getSmarty()->display("book.tpl");
         

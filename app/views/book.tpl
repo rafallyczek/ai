@@ -61,13 +61,13 @@
     
         <!-- Opis książki -->
         <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80">
-          <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 400px">
+          <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 450px">
             <h1 class="u-text u-text-1">Szczegóły książki</h1>
             {if \core\RoleUtils::inRole("admin")}
                 <a href="#" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1" style="margin-left: 0;">Edytuj książkę</a>
             {/if}
-            <div class="u-expanded-width u-list u-list-1" style="min-height: 400px">
-              <div class="u-repeater u-repeater-1" style="min-height: 400px">
+            <div class="u-expanded-width u-list u-list-1" style="min-height: 450px">
+              <div class="u-repeater u-repeater-1" style="min-height: 450px">
                 
                 <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 75px;">
                   <div class="u-container-layout u-similar-container u-container-layout-1">
@@ -89,16 +89,19 @@
         <section class="u-clearfix u-palette-5-light-3 u-section-2" id="carousel_fd80">
           <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 400px">
             <h1 class="u-text u-text-1">Recenzje</h1>
+            <a href="#" class="u-active-black u-border-1 u-border-black u-btn u-button-style u-hover-black u-none u-text-active-palette-5-light-3 u-text-black u-text-hover-palette-5-light-3 u-btn-1" style="margin-left: 0;">Napisz recenzję</a>
             <div class="u-expanded-width u-list u-list-1" style="min-height: 400px">
               <div class="u-repeater u-repeater-1" style="min-height: 400px">
                 
+                {foreach $reviews as $row}
                 <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 75px;">
                   <div class="u-container-layout u-similar-container u-container-layout-1" style="padding-top: 0;">
-                    <h2 class="u-text u-text-2" style="margin-top: 0; margin-left: 0;">User</h2>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0;"><span style="text-decoration: underline;">Ocena:</span> 10/10</h5>
-                    <h6 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0; font-size: 2rem;">Treść recenzji.</h6>
+                    <h2 class="u-text u-text-2" style="margin-top: 0; margin-left: 0;">{$row['username']}</h2>
+                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0;"><span style="text-decoration: underline;">Ocena:</span> {$row['score']}/10</h5>
+                    <h6 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0; font-size: 2rem;">{$row['description']}</h6>
                   </div>
                 </div>
+                {/foreach}
                 
               </div>
             </div>
