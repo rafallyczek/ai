@@ -89,7 +89,9 @@
         <section class="u-clearfix u-palette-5-light-3 u-section-2" id="carousel_fd80">
           <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 400px">
             <h1 class="u-text u-text-1">Recenzje</h1>
-            <a href="{url action='book_review' id=$book[0]['id']}" class="u-active-black u-border-1 u-border-black u-btn u-button-style u-hover-black u-none u-text-active-palette-5-light-3 u-text-black u-text-hover-palette-5-light-3 u-btn-1" style="margin-left: 0;">Napisz recenzję</a>
+            {if \core\RoleUtils::inAnyRole()}
+                <a href="{url action='book_review' id=$book[0]['id']}" class="u-active-black u-border-1 u-border-black u-btn u-button-style u-hover-black u-none u-text-active-palette-5-light-3 u-text-black u-text-hover-palette-5-light-3 u-btn-1" style="margin-left: 0;">Napisz recenzję</a>
+            {/if}
             <div class="u-expanded-width u-list u-list-1" style="min-height: 400px">
               <div class="u-repeater u-repeater-1" style="min-height: 400px">
                 
