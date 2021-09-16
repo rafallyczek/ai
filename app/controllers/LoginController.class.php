@@ -58,25 +58,40 @@ class LoginController{
     
     public function action_show_login(){
         
-        App::getSmarty()->assign('page_title','Logowanie');
-        App::getSmarty()->display('login.tpl');
+        if(RoleUtils::inAnyRole()){
+            App::getSmarty()->assign('page_title','Strona główna');
+            App::getSmarty()->display('main.tpl');
+        }else{
+            App::getSmarty()->assign('page_title','Logowanie');
+            App::getSmarty()->display('login.tpl');
+        }
         
     }
     
     public function action_login(){
         
-        if(!$this->validateLogin()){
-            App::getSmarty()->display('login.tpl');
+        if(RoleUtils::inAnyRole()){
+            App::getSmarty()->assign('page_title','Strona główna');
+            App::getSmarty()->display('main.tpl');
         }else{
-            App::getRouter()->redirectTo('show_main_page');
+            if(!$this->validateLogin()){
+                App::getSmarty()->display('login.tpl');
+            }else{
+                App::getRouter()->redirectTo('show_main_page');
+            }
         }
         
     }
     
     public function action_logout(){
         
-        session_destroy();
-        App::getRouter()->redirectTo('show_login');
+        if(RoleUtils::inAnyRole()){
+            session_destroy();
+            App::getRouter()->redirectTo('show_login');
+        }else{
+            App::getSmarty()->assign('page_title','Logowanie');
+            App::getSmarty()->display('login.tpl');
+        }
         
     }
     
