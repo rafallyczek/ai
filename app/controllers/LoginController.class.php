@@ -6,6 +6,7 @@ use core\App;
 use core\Message;
 use core\Validator;
 use core\RoleUtils;
+use core\SessionUtils;
 
 class LoginController{
     
@@ -35,7 +36,7 @@ class LoginController{
             return false;
         }
         
-        $user = App::getDB()->select("users", ["login","password","role"], ["login" => $login]);
+        $user = App::getDB()->select("users", "*", ["login" => $login]);
         
         if(!$user){
             App::getMessages()->addMessage(new Message('Nieprawidłowy login lub hasło.', Message::ERROR));
@@ -45,6 +46,7 @@ class LoginController{
         
         if($user[0]['password']==$password){
             RoleUtils::addRole($user[0]['role']);
+            SessionUtils::store("logged_user",$user);
             return true;
         }
         

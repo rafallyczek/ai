@@ -62,46 +62,31 @@
         <!-- Opis książki -->
         <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80">
           <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 450px">
-            <h1 class="u-text u-text-1">Szczegóły książki</h1>
-            {if \core\RoleUtils::inRole("admin")}
-                <a href="#" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1" style="margin-left: 0;">Edytuj książkę</a>
-            {/if}
+            <h1 class="u-text u-text-1" style="text-align: center; margin-bottom: 10px;">Recenzja</h1>
             <div class="u-expanded-width u-list u-list-1" style="min-height: 450px">
               <div class="u-repeater u-repeater-1" style="min-height: 450px">
                 
-                <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 75px;">
-                  <div class="u-container-layout u-similar-container u-container-layout-1">
-                    <img src="{$book[0]['picture']}" alt="" class="u-image u-image-default u-preserve-proportions u-image-1" data-image-width="626" data-image-height="626" style="height: 375px; width: 250px;">
-                    <h2 class="u-text u-text-2" style="margin-top: -375px;">{$book[0]['title']}</h2>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3"><span style="text-decoration: underline;">Autor:</span> {$book[0]['author']}</h5>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3"><span style="text-decoration: underline;">Wydanie:</span> {$book[0]['release_year']}</h5>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3" style="text-decoration: underline;">Opis:</h5>
-                    <h6 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; font-size: 2rem;">{$book[0]['description']}</h6>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-        </section>
-         
-        <!-- Recenzje -->
-        <section class="u-clearfix u-palette-5-light-3 u-section-2" id="carousel_fd80">
-          <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 400px">
-            <h1 class="u-text u-text-1">Recenzje</h1>
-            <a href="{url action='book_review' id=$book[0]['id']}" class="u-active-black u-border-1 u-border-black u-btn u-button-style u-hover-black u-none u-text-active-palette-5-light-3 u-text-black u-text-hover-palette-5-light-3 u-btn-1" style="margin-left: 0;">Napisz recenzję</a>
-            <div class="u-expanded-width u-list u-list-1" style="min-height: 400px">
-              <div class="u-repeater u-repeater-1" style="min-height: 400px">
-                
-                {foreach $reviews as $row}
-                <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 75px;">
-                  <div class="u-container-layout u-similar-container u-container-layout-1" style="padding-top: 0;">
-                    <h2 class="u-text u-text-2" style="margin-top: 0; margin-left: 0;">{$row['username']}</h2>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0;"><span style="text-decoration: underline;">Ocena:</span> {$row['score']}/10</h5>
-                    <h6 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0; font-size: 2rem;">{$row['description']}</h6>
-                  </div>
-                </div>
-                {/foreach}
+                <form class="pure-form pure-form-stacked" method="post" action="{url action='add_review'}" id="review_form">
+                    <fieldset style="width: 100px; margin: auto;">
+                        <label for="score">Ocena</label>
+                        <select id="score" name="score" style="color: black; width: 100px; height: 40px;">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <label for="content">Treść: </label>
+                        <textarea id="content" name="content" form="review_form" class="pure-input-1-2" placeholder="Treść recenzji." rows="10" cols="50" style="color: black; height: auto; width: auto; resize: none;"></textarea>
+                        <input type="hidden" id="book_id" name="book_id" value="{$book_id}"/>
+                        <button type="submit" class="pure-button pure-button-primary" style="background-color: #1cb841; margin-top: 5px;">Zapisz</button>
+                    </fieldset>
+                </form>  
                 
               </div>
             </div>

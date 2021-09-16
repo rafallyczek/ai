@@ -48,19 +48,17 @@
     
 	<section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80">
             <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 623px;">
-              <h1 class="u-text u-text-1" style="text-align: center;">Logowanie</h1>
+              <h1 class="u-text u-text-1" style="text-align: center; margin-bottom: 10px;">Logowanie</h1>
+              
                 <form class="pure-form pure-form-stacked" method="post" action="{url action='login'}">
                     <fieldset style="width: 100px; margin: auto;">
-                        <legend>Logowanie</legend>
                         <label for="login">Login: </label>
                         <input type="text" name="login" id="login" placeholder="Login" style="color: black;" {if isset($login)}value="{$login}"{/if}/>
                         <label for="password">Hasło: </label>
                         <input type="password" name="password" id="password" placeholder="Hasło" style="color: black;"/>
                         <button type="submit" class="pure-button pure-button-primary" style="background-color: #1cb841; margin-top: 5px;">Zaloguj</button>
                     </fieldset>
-                </form>
-
-                <br/>
+                </form>  
 
             </div>
         </section>
