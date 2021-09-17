@@ -13,6 +13,7 @@ Utils::addRoute('login', 'LoginController');
 Utils::addRoute('logout', 'LoginController');
 
 Utils::addRoute('book_list', 'BookController');
+Utils::addRoute('find_books', 'BookController');
 Utils::addRoute('book_details', 'BookController');
 Utils::addRoute('book_review', 'BookController', ['user','admin']);
 Utils::addRoute('add_review', 'BookController', ['user','admin']);

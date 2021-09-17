@@ -20,6 +20,17 @@ class BookController {
         
     }
     
+    //Znajdź książki
+    public function action_find_books() {
+
+        $title = ParamUtils::getFromPost("title");
+        $books = App::getDB()->select("books", "*", ["title[~]" => $title]);
+        App::getSmarty()->assign("books",$books);
+        App::getSmarty()->assign('page_title','Książki');
+        App::getSmarty()->display("books.tpl");
+        
+    }
+    
     //Wyświetlenie szczegółów książki
     public function action_book_details() {
 

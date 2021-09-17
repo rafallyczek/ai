@@ -62,10 +62,16 @@
         <!-- Lista książek -->
         <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80" style="padding-bottom: 100px;">
           <div class="u-clearfix u-sheet u-sheet-1">
-            <h1 class="u-text u-text-1">Książki</h1>
+            <h1 class="u-text u-text-1" style="margin-bottom: 20px;">Książki</h1>
             {if \core\RoleUtils::inRole("admin")}
                 <a href="{url action='book_insert'}" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1" style="margin-left: 0;">Dodaj książkę</a>
             {/if}
+            <form class="pure-form" method="post" action="{url action='find_books'}">
+                <fieldset>
+                    <input type="text" id="title" name="title" placeholder="Wyszukaj książki" style="color: black; margin-top: 5px;"/>
+                    <button type="submit" class="pure-button pure-button-primary" style="background-color: #1cb841; margin-top: 5px;">Wyszukaj</button>
+                </fieldset>
+            </form>
             <div class="u-expanded-width u-list u-list-1">
               <div class="u-repeater u-repeater-1">
                 
