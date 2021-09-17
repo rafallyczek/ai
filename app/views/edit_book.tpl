@@ -59,53 +59,34 @@
             </div>
         </header> 
     
-        <!-- Opis książki -->
+        <!-- Aktualizowanie książki -->
         <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80">
           <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 450px">
-            <h1 class="u-text u-text-1">Szczegóły książki</h1>
-            {if \core\RoleUtils::inRole("admin")}
-                <a href="{url action='book_edit' id=$book[0]['id']}" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1" style="margin-left: 0;">Edytuj książkę</a>
-                <a href="{url action='delete_book' id=$book[0]['id']}" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1" style="margin-left: 0;">Usuń książkę</a>
-            {/if}
+            <h1 class="u-text u-text-1" style="text-align: center; margin-bottom: 10px;">Edytuj książkę</h1>
             <div class="u-expanded-width u-list u-list-1" style="min-height: 450px">
               <div class="u-repeater u-repeater-1" style="min-height: 450px">
                 
-                <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 75px;">
-                  <div class="u-container-layout u-similar-container u-container-layout-1">
-                    <img src="{$book[0]['picture']}" alt="" class="u-image u-image-default u-preserve-proportions u-image-1" data-image-width="626" data-image-height="626" style="height: 375px; width: 250px;">
-                    <h2 class="u-text u-text-2" style="margin-top: -375px;">{$book[0]['title']}</h2>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3"><span style="text-decoration: underline;">Autor:</span> {$book[0]['author']}</h5>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3"><span style="text-decoration: underline;">Wydanie:</span> {$book[0]['release_year']}</h5>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3"><span style="text-decoration: underline;">E-book:</span> {if $book[0]['e_book']==0}nie{/if}{if $book[0]['e_book']==1}tak{/if}</h5>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3" style="text-decoration: underline;">Opis:</h5>
-                    <h6 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; font-size: 2rem;">{$book[0]['description']}</h6>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-        </section>
-         
-        <!-- Recenzje -->
-        <section class="u-clearfix u-palette-5-light-3 u-section-2" id="carousel_fd80">
-          <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 400px">
-            <h1 class="u-text u-text-1">Recenzje</h1>
-            {if \core\RoleUtils::inAnyRole()}
-                <a href="{url action='book_review' id=$book[0]['id']}" class="u-active-black u-border-1 u-border-black u-btn u-button-style u-hover-black u-none u-text-active-palette-5-light-3 u-text-black u-text-hover-palette-5-light-3 u-btn-1" style="margin-left: 0;">Napisz recenzję</a>
-            {/if}
-            <div class="u-expanded-width u-list u-list-1" style="min-height: 400px">
-              <div class="u-repeater u-repeater-1" style="min-height: 400px">
-                
-                {foreach $reviews as $row}
-                <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 75px;">
-                  <div class="u-container-layout u-similar-container u-container-layout-1" style="padding-top: 0;">
-                    <h2 class="u-text u-text-2" style="margin-top: 0; margin-left: 0;">{$row['username']}</h2>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0;"><span style="text-decoration: underline;">Ocena:</span> {$row['score']}/10</h5>
-                    <h6 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0; font-size: 2rem;">{$row['description']}</h6>
-                  </div>
-                </div>
-                {/foreach}
+                <form class="pure-form pure-form-stacked" method="post" action="{url action='update_book'}" id="update_book_form">
+                    <fieldset style="width: 100px; margin: auto;">
+                        <label for="title">Tytuł: </label>
+                        <input type="text" name="title" id="title" placeholder="Tytuł" value="{$book[0]['title']}" style="color: black;"/>
+                        <label for="author">Autor: </label>
+                        <input type="text" name="author" id="author" placeholder="Autor" value="{$book[0]['author']}" style="color: black;"/>
+                        <label for="release_year">Rok wydania: </label>
+                        <input type="text" name="release_year" id="release_year" placeholder="Rok wydania" value="{$book[0]['release_year']}" style="color: black;"/>
+                        <label for="picture">Link do okładki: </label>
+                        <input type="text" name="picture" id="picture" placeholder="Link do okładki" value="{$book[0]['picture']}" style="color: black;"/>
+                        <label for="description">Opis: </label>
+                        <textarea id="description" name="description" form="update_book_form" class="pure-input-1-2" placeholder="Opis książki." rows="10" cols="50" style="color: black; height: auto; width: auto; resize: none;">{$book[0]['description']}</textarea>
+                        <label for="ebook">E-book</label>
+                        <select id="ebook" name="ebook" style="color: black; width: 100px; height: 40px;">
+                            <option value="0" {if $book[0]['e_book']==0}selected{/if}>Nie</option>
+                            <option value="1" {if $book[0]['e_book']==1}selected{/if}>Tak</option>
+                        </select>
+                        <input type="hidden" id="book_id" name="book_id" value="{$book[0]['id']}"/>
+                        <button type="submit" class="pure-button pure-button-primary" style="background-color: #1cb841; margin-top: 5px;">Zapisz</button>
+                    </fieldset>
+                </form>  
                 
               </div>
             </div>

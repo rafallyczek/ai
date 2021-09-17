@@ -90,7 +90,7 @@ class BookController {
         
     }
     
-    //Dodanie
+    //Dodanie książki
     public function action_add_book() {
 
         $validator = new Validator();
@@ -181,21 +181,110 @@ class BookController {
         
     }
     
-    //Aktualizacja danych książki
-    public function action_update_book() {
-
-        App::getMessages()->addMessage(new Message("Wywołano akcję: book_edit", Message::INFO));
-       
-        App::getSmarty()->display("books.tpl");
-        
-    }
-    
     //Wyświetlenie formularza z edycją książki
     public function action_book_edit() {
 
-        App::getMessages()->addMessage(new Message("Wywołano akcję: book_edit", Message::INFO));
-       
-        App::getSmarty()->display("books.tpl");
+        $id = ParamUtils::getFromCleanURL(1);
+        $book = App::getDB()->select("books", "*", ["id" => $id]);
+        App::getSmarty()->assign("book",$book);
+        App::getSmarty()->assign('page_title',"Edytuj książkę");
+        App::getSmarty()->display("edit_book.tpl");
+        
+    }
+    
+    //Aktualizacja danych książki
+    public function action_update_book() {
+
+        $id = ParamUtils::getFromPost("book_id");
+        
+        $validator = new Validator();
+        
+        $title = $validator->validateFromRequest("title", [
+            'required' => true,
+            'required_message' => 'Tytuł jest wymagany.',
+            'min_length' => 1,
+            'validator_message' => 'Nie wprowadzono żadnych znaków.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            $book = App::getDB()->select("books", "*", ["id" => $id]);
+            App::getSmarty()->assign("book",$book);
+            App::getSmarty()->display('edit_book.tpl');
+            exit();
+        }
+        
+        $author = $validator->validateFromRequest("author", [
+            'required' => true,
+            'required_message' => 'Autor jest wymagany.',
+            'min_length' => 1,
+            'validator_message' => 'Nie wprowadzono żadnych znaków.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            $book = App::getDB()->select("books", "*", ["id" => $id]);
+            App::getSmarty()->assign("book",$book);
+            App::getSmarty()->display('edit_book.tpl');
+            exit();
+        }
+        
+        $release_year = $validator->validateFromRequest("release_year", [
+            'required' => true,
+            'required_message' => 'Rok wydania jest wymagany.',
+            'min_length' => 4,
+            'max_length' => 4,
+            'int' => true,
+            'validator_message' => 'Rok wydania powinien składać się z 4 cyfr całkiowitych.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            $book = App::getDB()->select("books", "*", ["id" => $id]);
+            App::getSmarty()->assign("book",$book);
+            App::getSmarty()->display('edit_book.tpl');
+            exit();
+        }
+        
+        $picture = $validator->validateFromRequest("picture", [
+            'required' => true,
+            'required_message' => 'Link do okładki jest wymagany.',
+            'min_length' => 1,
+            'validator_message' => 'Nie wprowadzono żadnych znaków.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            $book = App::getDB()->select("books", "*", ["id" => $id]);
+            App::getSmarty()->assign("book",$book);
+            App::getSmarty()->display('edit_book.tpl');
+            exit();
+        }
+        
+        $description = $validator->validateFromRequest("description", [
+            'required' => true,
+            'required_message' => 'Opis jest wymagany.',
+            'min_length' => 1,
+            'validator_message' => 'Nie wprowadzono żadnych znaków.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            $book = App::getDB()->select("books", "*", ["id" => $id]);
+            App::getSmarty()->assign("book",$book);
+            App::getSmarty()->display('edit_book.tpl');
+            exit();
+        }
+        
+        $ebook = ParamUtils::getFromPost("ebook");
+        
+        App::getDB()->update("books", [
+                "title" => $title,
+                "author" => $author,
+                "description" => $description,
+                "release_year" => $release_year,
+                "picture" => $picture,
+                "e_book" => $ebook
+            ],[
+                "id" => $id
+        ]);
+        
+        App::getRouter()->redirectTo('book_list');
         
     }
     
