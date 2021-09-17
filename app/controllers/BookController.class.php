@@ -46,6 +46,8 @@ class BookController {
     //Dodanie recenzji
     public function action_add_review() {
         
+        $book_id = ParamUtils::getFromPost("book_id");
+        
         $validator = new Validator();
         
         $content = $validator->validateFromRequest("content", [
@@ -55,37 +57,127 @@ class BookController {
             'validator_message' => 'Nie wprowadzono żadnych znaków.',
         ]);
        
-        if($validator->isLastOK()){
-            $user = SessionUtils::load("logged_user",true);
-            $score = ParamUtils::getFromPost("score");
-            $book_id = ParamUtils::getFromPost("book_id");
-            App::getDB()->insert("reviews", [
-                "score" => $score,
-                "description" => $content,
-                "username" => $user[0]["login"],
-                "user_id" => $user[0]["id"],
-                "book_id" => $book_id
-            ]);
-            $book = App::getDB()->select("books", "*", ["id" => $book_id]);
-            $reviews = App::getDB()->select("reviews", "*", ["book_id" => $book_id]);
-            App::getSmarty()->assign("book",$book);
-            App::getSmarty()->assign("reviews",$reviews);
-            App::getSmarty()->assign('page_title',$book[0]["title"]);
-            App::getSmarty()->display("book.tpl");
-        }else{
+        if(!$validator->isLastOK()){
             App::getSmarty()->assign("book_id",$book_id);
             App::getSmarty()->assign('page_title',"Recenzja");
             App::getSmarty()->display("review.tpl");
+            exit();
         }
+        
+        $user = SessionUtils::load("logged_user",true);
+        $score = ParamUtils::getFromPost("score");
+        App::getDB()->insert("reviews", [
+            "score" => $score,
+            "description" => $content,
+            "username" => $user[0]["login"],
+            "user_id" => $user[0]["id"],
+            "book_id" => $book_id
+        ]);
+        $book = App::getDB()->select("books", "*", ["id" => $book_id]);
+        $reviews = App::getDB()->select("reviews", "*", ["book_id" => $book_id]);
+        App::getSmarty()->assign("book",$book);
+        App::getSmarty()->assign("reviews",$reviews);
+        App::getSmarty()->assign('page_title',$book[0]["title"]);
+        App::getSmarty()->display("book.tpl");
 
     }
     
-    //Usunięcie książki
-    public function action_book_delete() {
+    //Wyświetlenie formularza z dodawaniem książki
+    public function action_book_insert() {
 
-        App::getMessages()->addMessage(new Message("Wywołano akcję: book_delete", Message::INFO));
-       
-        App::getSmarty()->display("books.tpl");
+        App::getSmarty()->assign('page_title',"Dodaj książkę");
+        App::getSmarty()->display("add_book.tpl");
+        
+    }
+    
+    //Dodanie
+    public function action_add_book() {
+
+        $validator = new Validator();
+        
+        $title = $validator->validateFromRequest("title", [
+            'required' => true,
+            'required_message' => 'Tytuł jest wymagany.',
+            'min_length' => 1,
+            'validator_message' => 'Nie wprowadzono żadnych znaków.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            App::getSmarty()->display('add_book.tpl');
+            exit();
+        }
+        
+        $author = $validator->validateFromRequest("author", [
+            'required' => true,
+            'required_message' => 'Autor jest wymagany.',
+            'min_length' => 1,
+            'validator_message' => 'Nie wprowadzono żadnych znaków.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            App::getSmarty()->display('add_book.tpl');
+            exit();
+        }
+        
+        $release_year = $validator->validateFromRequest("release_year", [
+            'required' => true,
+            'required_message' => 'Rok wydania jest wymagany.',
+            'min_length' => 4,
+            'max_length' => 4,
+            'int' => true,
+            'validator_message' => 'Rok wydania powinien składać się z 4 cyfr całkiowitych.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            App::getSmarty()->display('add_book.tpl');
+            exit();
+        }
+        
+        $picture = $validator->validateFromRequest("picture", [
+            'required' => true,
+            'required_message' => 'Link do okładki jest wymagany.',
+            'min_length' => 1,
+            'validator_message' => 'Nie wprowadzono żadnych znaków.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            App::getSmarty()->display('add_book.tpl');
+            exit();
+        }
+        
+        $description = $validator->validateFromRequest("description", [
+            'required' => true,
+            'required_message' => 'Opis jest wymagany.',
+            'min_length' => 1,
+            'validator_message' => 'Nie wprowadzono żadnych znaków.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            App::getSmarty()->display('add_book.tpl');
+            exit();
+        }
+        
+        $ebook = ParamUtils::getFromPost("ebook");
+        
+        App::getDB()->insert("books", [
+                "title" => $title,
+                "author" => $author,
+                "description" => $description,
+                "release_year" => $release_year,
+                "picture" => $picture,
+                "e_book" => $ebook
+            ]);
+        
+        App::getRouter()->redirectTo('book_list');
+        
+    }
+    
+    //Usunięcie książki
+    public function action_delete_book() {
+
+        $id = ParamUtils::getFromCleanURL(1);
+        App::getDB()->delete("books", ["id" => $id]);
+        App::getRouter()->redirectTo('book_list');
         
     }
     
@@ -102,15 +194,6 @@ class BookController {
     public function action_book_edit() {
 
         App::getMessages()->addMessage(new Message("Wywołano akcję: book_edit", Message::INFO));
-       
-        App::getSmarty()->display("books.tpl");
-        
-    }
-    
-    //Wyświetlenie formularza z dodawaniem książki
-    public function action_book_add() {
-
-        App::getMessages()->addMessage(new Message("Wywołano akcję: book_add", Message::INFO));
        
         App::getSmarty()->display("books.tpl");
         

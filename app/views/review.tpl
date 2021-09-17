@@ -59,7 +59,7 @@
             </div>
         </header> 
     
-        <!-- Opis książki -->
+        <!-- Dodawanie recenzji -->
         <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80">
           <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 450px">
             <h1 class="u-text u-text-1" style="text-align: center; margin-bottom: 10px;">Recenzja</h1>

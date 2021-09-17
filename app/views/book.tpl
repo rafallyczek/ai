@@ -65,6 +65,7 @@
             <h1 class="u-text u-text-1">Szczegóły książki</h1>
             {if \core\RoleUtils::inRole("admin")}
                 <a href="#" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1" style="margin-left: 0;">Edytuj książkę</a>
+                <a href="{url action='delete_book' id=$book[0]['id']}" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1" style="margin-left: 0;">Usuń książkę</a>
             {/if}
             <div class="u-expanded-width u-list u-list-1" style="min-height: 450px">
               <div class="u-repeater u-repeater-1" style="min-height: 450px">
@@ -75,6 +76,7 @@
                     <h2 class="u-text u-text-2" style="margin-top: -375px;">{$book[0]['title']}</h2>
                     <h5 class="u-custom-font u-font-pt-sans u-text u-text-3"><span style="text-decoration: underline;">Autor:</span> {$book[0]['author']}</h5>
                     <h5 class="u-custom-font u-font-pt-sans u-text u-text-3"><span style="text-decoration: underline;">Wydanie:</span> {$book[0]['release_year']}</h5>
+                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3"><span style="text-decoration: underline;">E-book:</span> {if $book[0]['e_book']==0}nie{/if}{if $book[0]['e_book']==1}tak{/if}</h5>
                     <h5 class="u-custom-font u-font-pt-sans u-text u-text-3" style="text-decoration: underline;">Opis:</h5>
                     <h6 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; font-size: 2rem;">{$book[0]['description']}</h6>
                   </div>

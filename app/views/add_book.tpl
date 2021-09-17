@@ -59,32 +59,38 @@
             </div>
         </header> 
     
-        <!-- Lista książek -->
-        <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80" style="padding-bottom: 100px;">
-          <div class="u-clearfix u-sheet u-sheet-1">
-            <h1 class="u-text u-text-1">Książki</h1>
-            {if \core\RoleUtils::inRole("admin")}
-                <a href="{url action='book_insert'}" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1" style="margin-left: 0;">Dodaj książkę</a>
-            {/if}
-            <div class="u-expanded-width u-list u-list-1">
-              <div class="u-repeater u-repeater-1">
+        <!-- Dodawanie książki -->
+        <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="carousel_fd80">
+          <div class="u-clearfix u-sheet u-sheet-1" style="min-height: 450px">
+            <h1 class="u-text u-text-1" style="text-align: center; margin-bottom: 10px;">Dodaj książkę</h1>
+            <div class="u-expanded-width u-list u-list-1" style="min-height: 450px">
+              <div class="u-repeater u-repeater-1" style="min-height: 450px">
                 
-                {foreach $books as $row}
-                <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 30px; min-height: 375px;">
-                  <div class="u-container-layout u-similar-container u-container-layout-1">
-                    <img src="{$row['picture']}" alt="" class="u-image u-image-default u-preserve-proportions u-image-1" data-image-width="626" data-image-height="626" style="height: 375px; width: 250px;">
-                    <h2 class="u-text u-text-2" style="margin-top: -375px;">{$row['title']}</h2>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3">Wydanie: {$row['release_year']}</h5>
-                    <a href="{url action='book_details' id=$row['id']}" class="u-active-white u-border-1 u-border-white u-btn u-button-style u-hover-white u-none u-text-active-palette-5-dark-3 u-text-body-alt-color u-text-hover-palette-5-dark-3 u-btn-1">Więcej</a>
-                  </div>
-                </div>
-                {/foreach}
-
+                <form class="pure-form pure-form-stacked" method="post" action="{url action='add_book'}" id="add_book_form">
+                    <fieldset style="width: 100px; margin: auto;">
+                        <label for="title">Tytuł: </label>
+                        <input type="text" name="title" id="title" placeholder="Tytuł" style="color: black;"/>
+                        <label for="author">Autor: </label>
+                        <input type="text" name="author" id="author" placeholder="Autor" style="color: black;"/>
+                        <label for="release_year">Rok wydania: </label>
+                        <input type="text" name="release_year" id="release_year" placeholder="Rok wydania" style="color: black;"/>
+                        <label for="picture">Link do okładki: </label>
+                        <input type="text" name="picture" id="picture" placeholder="Link do okładki" style="color: black;"/>
+                        <label for="description">Opis: </label>
+                        <textarea id="description" name="description" form="add_book_form" class="pure-input-1-2" placeholder="Opis książki." rows="10" cols="50" style="color: black; height: auto; width: auto; resize: none;"></textarea>
+                        <label for="ebook">E-book</label>
+                        <select id="ebook" name="ebook" style="color: black; width: 100px; height: 40px;">
+                            <option value="0">Nie</option>
+                            <option value="1">Tak</option>
+                        </select>
+                        <button type="submit" class="pure-button pure-button-primary" style="background-color: #1cb841; margin-top: 5px;">Zapisz</button>
+                    </fieldset>
+                </form>  
+                
               </div>
             </div>
           </div>
         </section>
-              
                 
         <!-- Stopka -->
         <footer class="u-align-center u-clearfix u-footer u-palette-2-base u-footer" id="sec-8349">
