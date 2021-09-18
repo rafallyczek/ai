@@ -108,7 +108,7 @@
                         <fieldset>
                             <input type="hidden" id="title" name="title" value="{$title}"/>
                             <input type="hidden" id="page" name="page" value="{$page-1}"/>
-                            <button type="submit" class="pure-button" style="font-size: 200%; color: black; position: absolute; left: -50px;"><i class="fas fa-angle-left"></i></button>
+                            <button type="submit" title="Poprzednia strona" class="pure-button" style="font-size: 200%; color: black; position: absolute; left: -50px;"><i class="fas fa-angle-left"></i></button>
                         </fieldset>
                     </form>
                 {/if}
@@ -117,7 +117,7 @@
                         <fieldset>
                             <input type="hidden" id="title" name="title" value="{$title}"/>
                             <input type="hidden" id="page" name="page" value="{$page+1}"/>
-                            <button type="submit" class="pure-button" style="font-size: 200%; color: black; position: absolute; right: -50px;"><i class="fas fa-angle-right"></i></button>
+                            <button type="submit" title="Następna strona" class="pure-button" style="font-size: 200%; color: black; position: absolute; right: -50px;"><i class="fas fa-angle-right"></i></button>
                         </fieldset>
                     </form>
                 {/if}
