@@ -28,7 +28,7 @@
                   <div class="u-nav-container">
                     <ul class="u-nav u-unstyled u-nav-1">
                         <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='show_main_page'}" style="padding: 10px 20px;">Strona Główna</a></li>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='book_list'}" style="padding: 10px 20px;">Książki</a></li>
+                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='book_list' page=1}" style="padding: 10px 20px;">Książki</a></li>
                         {if not \core\RoleUtils::inAnyRole()}
                             <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='show_login'}" style="padding: 10px 20px;">Logowanie</a></li>
                         {/if}
@@ -43,7 +43,7 @@
                         <div class="u-menu-close"></div>
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='show_main_page'}">Strona Główna</a></li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='book_list'}">Książki</a></li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='book_list' page=1}">Książki</a></li>
                             {if not \core\RoleUtils::inAnyRole()}
                                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='show_login'}">Logowanie</a></li>
                             {/if}
@@ -68,7 +68,8 @@
             {/if}
             <form class="pure-form" method="post" action="{url action='find_books'}">
                 <fieldset>
-                    <input type="text" id="title" name="title" placeholder="Wyszukaj książki" style="color: black; margin-top: 5px;"/>
+                    <input type="text" id="title" name="title" placeholder="Wyszukaj książki" style="color: black; margin-top: 5px; width: 300px;"/>
+                    <input type="hidden" id="page" name="page" value="1"/>
                     <button type="submit" class="pure-button pure-button-primary" style="background-color: #1cb841; margin-top: 5px;">Wyszukaj</button>
                 </fieldset>
             </form>
@@ -88,6 +89,41 @@
 
               </div>
             </div>
+            
+            {if !isset($title)}
+                <div style="margin-top: 50px; position: relative;">
+                    {if $page!=1}
+                        <a class="pure-button" href="{url action='book_list' page=$page-1}" title="Poprzednia strona" style="font-size: 200%; color: black; position: absolute; left: -50px;"><i class="fas fa-angle-left"></i></a>   
+                    {/if}
+                    {if $page<$max_page}
+                        <a class="pure-button" href="{url action='book_list' page=$page+1}" title="Następna strona" style="font-size: 200%; color: black; position: absolute; right: -50px;"><i class="fas fa-angle-right"></i></a>
+                    {/if}
+                </div>
+            {/if}
+            
+            {if isset($title)}
+            <div style="margin-top: 50px; position: relative;">
+                {if $page!=1}
+                    <form class="pure-form" method="post" action="{url action='find_books'}">
+                        <fieldset>
+                            <input type="hidden" id="title" name="title" value="{$title}"/>
+                            <input type="hidden" id="page" name="page" value="{$page-1}"/>
+                            <button type="submit" class="pure-button" style="font-size: 200%; color: black; position: absolute; left: -50px;"><i class="fas fa-angle-left"></i></button>
+                        </fieldset>
+                    </form>
+                {/if}
+                {if $page<$max_page}
+                    <form class="pure-form" method="post" action="{url action='find_books'}">
+                        <fieldset>
+                            <input type="hidden" id="title" name="title" value="{$title}"/>
+                            <input type="hidden" id="page" name="page" value="{$page+1}"/>
+                            <button type="submit" class="pure-button" style="font-size: 200%; color: black; position: absolute; right: -50px;"><i class="fas fa-angle-right"></i></button>
+                        </fieldset>
+                    </form>
+                {/if}
+            </div>
+            {/if}
+            
           </div>
         </section>
               

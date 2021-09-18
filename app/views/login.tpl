@@ -27,7 +27,7 @@
                   <div class="u-nav-container">
                     <ul class="u-nav u-unstyled u-nav-1">
                         <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='show_main_page'}" style="padding: 10px 20px;">Strona Główna</a></li>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='book_list'}" style="padding: 10px 20px;">Książki</a></li>
+                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{url action='book_list' page=1}" style="padding: 10px 20px;">Książki</a></li>
                     </ul>
                   </div>
                   <div class="u-nav-container-collapse">
@@ -36,7 +36,7 @@
                         <div class="u-menu-close"></div>
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='show_main_page'}">Strona Główna</a></li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='book_list'}">Książki</a></li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{url action='book_list' page=1}">Książki</a></li>
                         </ul>
                       </div>
                     </div>

@@ -13,8 +13,12 @@ class BookController {
     //Wyświetlenie listy książek
     public function action_book_list() {
 
-        $books = App::getDB()->select("books", "*");
+        $page = ParamUtils::getFromCleanURL(1);
+        $max_page = ceil(App::getDB()->count("books", "*")/5);
+        $books = App::getDB()->select("books", "*", [ "LIMIT" => [5*($page-1),5] ]);
         App::getSmarty()->assign("books",$books);
+        App::getSmarty()->assign("page",$page);
+        App::getSmarty()->assign("max_page",$max_page);
         App::getSmarty()->assign('page_title','Książki');
         App::getSmarty()->display("books.tpl");
         
@@ -23,9 +27,18 @@ class BookController {
     //Znajdź książki
     public function action_find_books() {
 
+        $page = ParamUtils::getFromPost("page");
         $title = ParamUtils::getFromPost("title");
-        $books = App::getDB()->select("books", "*", ["title[~]" => $title]);
+        $max_page = ceil(App::getDB()->count("books", "*", [ "title[~]" => $title ])/5);
+        
+        $books = App::getDB()->select("books", "*", [  
+              "LIMIT" => [5*($page-1),5],
+              "title[~]" => $title    
+        ]);
         App::getSmarty()->assign("books",$books);
+        App::getSmarty()->assign("page",$page);
+        App::getSmarty()->assign("max_page",$max_page);
+        App::getSmarty()->assign("title",$title);
         App::getSmarty()->assign('page_title','Książki');
         App::getSmarty()->display("books.tpl");
         
