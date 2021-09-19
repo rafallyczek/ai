@@ -60,6 +60,10 @@
                     </fieldset>
                 </form>  
 
+                {foreach $msgs->getMessages() as $msg}
+                    <p style="background-color: #d22d35; padding: 3px 3px 3px 6px; width: 300px; border-radius: 3px; margin: 20px auto 20px auto;">{$msg->text}</p>
+                {/foreach}
+                        
             </div>
         </section>
 	

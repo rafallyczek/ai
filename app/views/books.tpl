@@ -73,6 +73,7 @@
                     <button type="submit" class="pure-button pure-button-primary" style="background-color: #1cb841; margin-top: 5px;">Wyszukaj</button>
                 </fieldset>
             </form>
+            <p style="background-color: #666666; padding: 3px 3px 3px 6px; width: 300px; border-radius: 3px;">{$msgs->getMessage(0)->text}</p>    
             <div class="u-expanded-width u-list u-list-1">
               <div class="u-repeater u-repeater-1">
                 
@@ -95,6 +96,7 @@
                     {if $page!=1}
                         <a class="pure-button" href="{url action='book_list' page=$page-1}" title="Poprzednia strona" style="font-size: 200%; color: black; position: absolute; left: -50px;"><i class="fas fa-angle-left"></i></a>   
                     {/if}
+                    <p style="font-size: 200%; position: absolute; right: 50%; margin-top: 0;">> {$page} <</p>
                     {if $page<$max_page}
                         <a class="pure-button" href="{url action='book_list' page=$page+1}" title="Następna strona" style="font-size: 200%; color: black; position: absolute; right: -50px;"><i class="fas fa-angle-right"></i></a>
                     {/if}
@@ -112,6 +114,7 @@
                         </fieldset>
                     </form>
                 {/if}
+                <p style="font-size: 200%; position: absolute; right: 50%; margin-top: 0;">> {$page} <</p>
                 {if $page<$max_page}
                     <form class="pure-form" method="post" action="{url action='find_books'}">
                         <fieldset>

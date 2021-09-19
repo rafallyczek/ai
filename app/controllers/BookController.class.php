@@ -14,8 +14,10 @@ class BookController {
     public function action_book_list() {
 
         $page = ParamUtils::getFromCleanURL(1);
-        $max_page = ceil(App::getDB()->count("books", "*")/5);
+        $book_count = App::getDB()->count("books", "*");
+        $max_page = ceil($book_count/5);
         $books = App::getDB()->select("books", "*", [ "LIMIT" => [5*($page-1),5] ]);
+        App::getMessages()->addMessage(new Message("Ilość wyników: ".$book_count, Message::INFO));
         App::getSmarty()->assign("books",$books);
         App::getSmarty()->assign("page",$page);
         App::getSmarty()->assign("max_page",$max_page);
@@ -29,12 +31,13 @@ class BookController {
 
         $page = ParamUtils::getFromPost("page");
         $title = ParamUtils::getFromPost("title");
-        $max_page = ceil(App::getDB()->count("books", "*", [ "title[~]" => $title ])/5);
-        
+        $book_count = App::getDB()->count("books", "*", [ "title[~]" => $title ]);
+        $max_page = ceil($book_count/5);
         $books = App::getDB()->select("books", "*", [  
               "LIMIT" => [5*($page-1),5],
               "title[~]" => $title    
         ]);
+        App::getMessages()->addMessage(new Message("Ilość wyników: ".$book_count, Message::INFO));
         App::getSmarty()->assign("books",$books);
         App::getSmarty()->assign("page",$page);
         App::getSmarty()->assign("max_page",$max_page);
