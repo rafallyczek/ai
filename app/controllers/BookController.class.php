@@ -96,7 +96,7 @@ class BookController {
         App::getDB()->insert("reviews", [
             "score" => $score,
             "description" => $content,
-            "username" => $user[0]["login"],
+            "username" => $user[0]["username"],
             "user_id" => $user[0]["id"],
             "book_id" => $book_id
         ]);
