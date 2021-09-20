@@ -94,21 +94,22 @@
             {if \core\RoleUtils::inAnyRole()}
                 <a href="{url action='book_review' id=$book[0]['id']}" class="u-active-black u-border-1 u-border-black u-btn u-button-style u-hover-black u-none u-text-active-palette-5-light-3 u-text-black u-text-hover-palette-5-light-3 u-btn-1" style="margin-left: 0;">Napisz recenzję</a>
             {/if}
-            <div class="u-expanded-width u-list u-list-1" style="min-height: 400px">
-              <div class="u-repeater u-repeater-1" style="min-height: 400px">
+            
                 
                 {foreach $reviews as $row}
-                <div class="u-container-style u-list-item u-repeater-item" style="margin-bottom: 75px;">
+                <div class="u-container-style u-list-item u-repeater-item">
                   <div class="u-container-layout u-similar-container u-container-layout-1" style="padding-top: 0;">
-                    <h2 class="u-text u-text-2" style="margin-top: 0; margin-left: 0;">{$row['username']}</h2>
-                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0;"><span style="text-decoration: underline;">Ocena:</span> {$row['score']}/10</h5>
+                    <h2 class="u-text u-text-2" style="margin-top: 0; margin-left: 0; float: left;">{$row['username']}</h2>
+                    {if $row['user_id']==\core\SessionUtils::load("user_id",true)}
+                        <a href="{url action='delete_review' id=$row['id'] user_id=$row['user_id'] book_id=$book[0]['id']}}" class="pure-button pure-button-primary" style="background-color: #d22d35; margin-top: 10px; margin-left: 10px; padding: 10px;" title="Usuń recenzję"><i class="fas fa-times" style="font-size: 125%; width: 20px;"></i></a>
+                    {/if}
+                    <h5 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0; clear: both;"><span style="text-decoration: underline;">Ocena:</span> {$row['score']}/10</h5>
                     <h6 class="u-custom-font u-font-pt-sans u-text u-text-3" style="margin-top: 0; margin-left: 0; font-size: 2rem;">{$row['description']}</h6>
                   </div>
                 </div>
                 {/foreach}
                 
-              </div>
-            </div>
+            
           </div>
         </section>
                 

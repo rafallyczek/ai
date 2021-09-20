@@ -47,6 +47,7 @@ class LoginController{
         if($user[0]['password']==$password){
             RoleUtils::addRole($user[0]['role']);
             SessionUtils::store("logged_user",$user);
+            SessionUtils::store("user_id",$user[0]["id"]);
             return true;
         }
         

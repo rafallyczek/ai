@@ -19,6 +19,7 @@ Utils::addRoute('find_books', 'BookController');
 Utils::addRoute('book_details', 'BookController');
 Utils::addRoute('book_review', 'BookController', ['user','admin']);
 Utils::addRoute('add_review', 'BookController', ['user','admin']);
+Utils::addRoute('delete_review', 'BookController', ['user','admin']);
 Utils::addRoute('book_insert', 'BookController', ['admin']);
 Utils::addRoute('add_book', 'BookController', ['admin']);
 Utils::addRoute('delete_book', 'BookController', ['admin']);

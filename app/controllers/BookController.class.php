@@ -109,6 +109,25 @@ class BookController {
 
     }
     
+    public function action_delete_review(){
+        
+        $id = ParamUtils::getFromCleanURL(1);
+        $user_id = ParamUtils::getFromCleanURL(2);
+        $book_id = ParamUtils::getFromCleanURL(3);
+        $logged_user_id = SessionUtils::load("user_id",true);
+        if($user_id!=$logged_user_id){
+            
+            App::getRouter()->redirectTo('book_details/'.$book_id);
+            
+        }else{
+            
+            App::getDB()->delete("reviews", ["id" => $id]);
+            App::getRouter()->redirectTo('book_details/'.$book_id);
+            
+        }
+        
+    }
+    
     //Wyświetlenie formularza z dodawaniem książki
     public function action_book_insert() {
 
@@ -195,7 +214,7 @@ class BookController {
                 "e_book" => $ebook
             ]);
         
-        App::getRouter()->redirectTo('book_list');
+        App::getRouter()->redirectTo('book_list/1');
         
     }
     
@@ -204,7 +223,7 @@ class BookController {
 
         $id = ParamUtils::getFromCleanURL(1);
         App::getDB()->delete("books", ["id" => $id]);
-        App::getRouter()->redirectTo('book_list');
+        App::getRouter()->redirectTo('book_list/1');
         
     }
     
@@ -311,7 +330,7 @@ class BookController {
                 "id" => $id
         ]);
         
-        App::getRouter()->redirectTo('book_list');
+        App::getRouter()->redirectTo('book_list/1');
         
     }
     
