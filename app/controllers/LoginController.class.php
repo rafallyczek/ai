@@ -95,4 +95,65 @@ class LoginController{
         
     }
     
+    public function action_show_register(){
+        
+        App::getSmarty()->assign('page_title','Rejestracja');
+        App::getSmarty()->display('register.tpl');
+        
+    }
+    
+    public function action_register(){
+        
+        $validator = new Validator();
+        
+        $login = $validator->validateFromRequest("login", [
+            'required' => true,
+            'required_message' => 'Login jest wymagany.',
+            'min_length' => 4,
+            'validator_message' => 'Login musi mieć przynajmniej 4 znaki.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            App::getSmarty()->assign('page_title',"Rejestracja");
+            App::getSmarty()->display("register.tpl");
+            exit();
+        }
+
+        $password = $validator->validateFromRequest("password", [
+            'required' => true,
+            'required_message' => 'Hasło jest wymagane.',
+            'min_length' => 4,
+            'validator_message' => 'Hasło musi mieć przynajmniej 4 znaki.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            App::getSmarty()->assign('page_title',"Rejestracja");
+            App::getSmarty()->display("register.tpl");
+            exit();
+        }
+        
+        $username = $validator->validateFromRequest("username", [
+            'required' => true,
+            'required_message' => 'Nazwa użytkownika jest wymagana.',
+            'min_length' => 1,
+            'validator_message' => 'Nie podano nazwy użytkownika.',
+        ]);
+        
+        if(!$validator->isLastOK()){
+            App::getSmarty()->assign('page_title',"Rejestracja");
+            App::getSmarty()->display("register.tpl");
+            exit();
+        }
+        
+        App::getDB()->insert("users", [
+            "login" => $login,
+            "password" => $password,
+            "username" => $username,
+            "role" => "user",
+        ]);
+        
+        App::getRouter()->redirectTo('show_login');
+        
+    }
+    
 }

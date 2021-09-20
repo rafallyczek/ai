@@ -11,6 +11,8 @@ Utils::addRoute('show_main_page', 'MainController');
 Utils::addRoute('show_login', 'LoginController');
 Utils::addRoute('login', 'LoginController');
 Utils::addRoute('logout', 'LoginController');
+Utils::addRoute('show_register', 'LoginController');
+Utils::addRoute('register', 'LoginController');
 
 Utils::addRoute('book_list', 'BookController');
 Utils::addRoute('find_books', 'BookController');
